@@ -1,0 +1,27 @@
+{
+  "name": "3d-tuning",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@tresjs/cientos": "^4.1.0",
+    "@tresjs/core": "^4.3.2",
+    "three": "^0.172.0",
+    "three-addons": "^1.2.0",
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "@types/three": "^0.172.0",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vue/tsconfig": "^0.7.0",
+    "sass": "^1.83.4",
+    "typescript": "~5.6.2",
+    "vite": "^6.0.11",
+    "vue-tsc": "^2.2.0"
+  }
+}
