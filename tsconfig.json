@@ -1,14 +1,18 @@
 {
   "files": [],
   "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.node.json"
+    }
   ],
   "compilerOptions": {
     "module": "ESNext",
-    "target": "ESNext",  // Or "ES2020", depending on your environment
+    "target": "ESNext", // Or "ES2020", depending on your environment
     "moduleResolution": "node",
     "strict": true,
     // other options...
-  }
+  },
 }

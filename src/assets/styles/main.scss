@@ -8,3 +8,11 @@ body {
     height: 100%;
     width: 100%;
   }
+.scene{
+  &_change_buttons{
+position: absolute;
+z-index: 99;
+left: 50%;
+top: 50px;
+  }
+}
