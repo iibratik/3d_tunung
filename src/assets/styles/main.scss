@@ -1,18 +1,33 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
-  }
-  #app {
-    height: 100%;
-    width: 100%;
-  }
-.scene{
-  &_change_buttons{
-position: absolute;
-z-index: 99;
-left: 50%;
-top: 50px;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+#app {
+  height: 100%;
+  width: 100%;
+}
+.scene {
+  &-change {
+    &-button {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: Roboto;
+      gap: 10px;
+      text-transform: uppercase;
+      &s {
+        position: absolute;
+        display: flex;
+        gap: 30px;
+        z-index: 99;
+        left: 58%;
+        transform: translateX(-100%);
+        top: 50px;
+        color: white;
+      }
+    }
   }
 }

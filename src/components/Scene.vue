@@ -2,14 +2,21 @@
 
 <template>
   <section class="scene">
-    <div class="scene_change_buttons">
-      <input type="color" v-model="changeColor"/>
+    <div class="scene-change-buttons">
+      <div class="scene-change-button">
+        <label for="bodyColor">Цвет кузова</label>
+        <input id="bodyColor" type="color" v-model="bodyColor" />
+      </div>
+      <div class="scene-change-button">
+        <label for="windowColor">Цвет тонировки</label>
+        <input type="color" v-model="windowColor" />
+      </div>
     </div>
     <TresCanvas window-size v-bind="globalSettings" clear-color="#4f4f4f">
       <TresPerspectiveCamera :position="[5, 5, 5]" />
       <OrbitControls />
       <Suspense>
-        <Model :changeColor="changeColor" />
+        <Model :bodyColor="bodyColor" :windowColor="windowColor" />
       </Suspense>
       <TresDirectionalLight color="red" :position="[3, 3, 3]" :intensity="1" />
       <TresAmbientLight :intensity="2" />
@@ -29,7 +36,8 @@ export default defineComponent({
   components: { OrbitControls, GLTFModel, TresCanvas, Model },
   data() {
     return {
-      changeColor: '#ffea00',
+      bodyColor: "#ffea00",
+      windowColor: "#222222FF",
       globalSettings: {
         clearColor: "gray",
         shadows: true,
@@ -40,7 +48,6 @@ export default defineComponent({
       },
     };
   },
-  methods: {
-  },
+  methods: {},
 });
 </script>

@@ -9,14 +9,16 @@ import { defineProps, watch, onMounted } from "vue";
 
 // Определяем пропс для передачи цвета
 const props = defineProps<{
-  changeColor: string; // Цвет в формате HEX
+  bodyColor: string;
+  windowColor: string;
 }>();
 
 // Загрузка модели
 const { scene: model, materials } = await useGLTF("/models/bmwm4/scene.gltf");
-
 // Функция для извлечения RGB из HEX и обновления материала
-const updateColorAndMaterial = (hexColor: string) => {
+materials.Window_Material.opacity = 120;
+
+function updateWindowColor(hexColor: string) {
   // Убираем # в начале, если он есть
   hexColor = hexColor.replace("#", "");
 
@@ -26,25 +28,47 @@ const updateColorAndMaterial = (hexColor: string) => {
   const b = parseInt(hexColor.substring(4, 6), 16);
 
   // Применяем новый цвет к материалу
-  const material = materials.Paint_Material as MeshStandardMaterial;
-  material.color.setRGB(r / 255, g / 255, b / 255); // Нормализуем значения от 0 до 1
+  const materialColor = materials.Window_Material as MeshStandardMaterial;
+  materialColor.color.setRGB(r / 255, g / 255, b / 255); // Нормализуем значения от 0 до 1
 
   // Обновляем значения компонентов RGB в модели данных (если нужно использовать их отдельно)
   return { r, g, b };
-};
+}
+function updateColorAndMaterial(hexColor: string) {
+  // Убираем # в начале, если он есть
+  hexColor = hexColor.replace("#", "");
 
-// Отслеживаем изменение пропса changeColor и обновляем материал
+  // Преобразуем строку HEX в RGB
+  const r = parseInt(hexColor.substring(0, 2), 16);
+  const g = parseInt(hexColor.substring(2, 4), 16);
+  const b = parseInt(hexColor.substring(4, 6), 16);
+
+  // Применяем новый цвет к материалу
+  const materialColor = materials.Paint_Material as MeshStandardMaterial;
+  materialColor.color.setRGB(r / 255, g / 255, b / 255); // Нормализуем значения от 0 до 1
+
+  // Обновляем значения компонентов RGB в модели данных (если нужно использовать их отдельно)
+  return { r, g, b };
+}
 watch(
-  () => props.changeColor, // отслеживаем пропс
+  () => props.bodyColor,
   (newColor) => {
     updateColorAndMaterial(newColor);
   },
-  { immediate: true } // сразу вызываем функцию при монтировании
+  { immediate: true }
+);
+
+watch(
+  () => props.windowColor,
+  (newColor) => {
+    updateWindowColor(newColor);
+  },
+  { immediate: true }
 );
 
 // Инициализация материала с начальным значением при монтировании
 onMounted(() => {
-  updateColorAndMaterial(props.changeColor);
+  updateColorAndMaterial(props.bodyColor);
 });
 </script>
 
